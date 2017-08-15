@@ -1,0 +1,86 @@
+<html>
+	<head>
+	<head>
+		<title>Find my fb user id</title>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="description" content="Find user id or uid of facebook profile info with username, url, link. Simple API use of fb">
+		<meta name="keywords" content="userID, fb, facebook, find, искать, ползователь,user, id, uid, find vk user id, how to find vk user id">
+		<script type="text/javascript" src="libs/jquery-3.1.1.js"></script>
+		<script type="text/javascript" src="libs/jquery-ui.min.js">></script>
+		<title>Find my fb user id</title>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+	</head>
+	<body>
+	<a href="http://vkuid.com/" target="_blank"><img src="img/vk-Ad.png" class="vk-ad"></a>
+	<img id="logo" src="img/facebook-flat.png"></img>
+	<p class="top-text">
+		To find Your FB (facebook) Numeric ID or UID  Paste Your Facebook Page URL below. 
+	</p>
+	<a href="https://facebook.com/me" target="_blank">
+		<p class="top-text">
+			<u>Here is your Facebook page URL</u>
+		</p>
+	</a>
+	<div id="inputs-wrapper" itemscope>
+		
+		<ul>
+			<li>
+				<input id="url" type="text" class="main-input" placeholder="User URL" itemprop="userPageUrl" equired>
+			</li>
+			<li style="text-align: center;">
+				<div class="get-btn" onclick="get()">
+					<span itemprop="getUserId">get Uid</span>
+				</div>
+			</li>
+			<li>
+				<p itemprop="userId">Uid</p>
+				<input id="uid" type="text" placeholder="">
+			</li>
+		</ul>
+	</div>
+	<div style="position: fixed; bottom: 0;" itemscope>
+		<p class="top-text" itemprop="description">
+			Do you want to find your fb(facebook) personal numeric ID, uid or you have a problem and it's how to find fb user id. Enter your fb.com personal profile URL here, if you want to find your
+		</p>
+		<p class="top-text" itemprop="description">
+			Хочеш найти свой личный цифровой ID facebook или uid? Это что-то новое для лучших администраторов, юзеров и групп. Вводи свой FB URL здесь, если хочеш найти свой username или lastname
+		</p>
+	</div>
+</body>
+	<script language="javascript">
+	function get(){
+		var input = $('#url').val();
+		$('#inputs-wrapper').animate({ height: "150px" }, 1000, "easeOutBounce");
+		$.ajax({
+			url: 'http://myfbtool.com/magicUrl.php',
+			type: 'POST',
+			data: {url: input},
+			success: function(res){
+				$('#uid').val(res);
+				$('#inputs-wrapper').animate({ height: "268px" }, 1000, "easeOutBounce");
+			}
+		})
+	}
+	</script>
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-78882141-2', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- Hotjar Tracking Code for http://myfbtool.com/ -->
+	<script>
+	    (function(h,o,t,j,a,r){
+	        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+	        h._hjSettings={hjid:321850,hjsv:5};
+	        a=o.getElementsByTagName('head')[0];
+	        r=o.createElement('script');r.async=1;
+	        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+	        a.appendChild(r);
+	    })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+	</script>
+</html>
