@@ -1,10 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
- HELLLO
+    <head>
+        <title>Salesforce External Id</title>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="description" content="Get Salesforce external id. Convert 15 digits id to 18 digits. Easy APEX classes">
+        <meta name="keywords" content="salesforce external id, convert 15 to 18, salesforce id converter, apex class, lightning">
+        <script type="text/javascript" src="../libs/jquery-3.1.1.js"></script>
+        <script type="text/javascript" src="../libs/jquery-ui.min.js">></script>
+        <title>Find my fb user id</title>
+        <link rel="stylesheet" type="text/css" href="../css/main.css">
+    </head>
+<body style="background: #0098DA">
+<a href="http://vkuid.com/" target="_blank"><img src="../img/vk-Ad.png" class="vk-ad"></a>
+<img id="logo" src="img/sf_logo.png" style="height: 124px;"></img>
+<p class="top-text">
+    Salesforce external ID. Convert 15 digit to 18 digit. Get Salesforce external Id or Salesforce org id.
+</p>
+<div id="inputs-wrapper" itemscope>
+    <ul>
+        <li>
+            <input id="url" type="text" class="main-input" placeholder="Salesforce id" itemprop="SalesforceID" required>
+        </li>
+        <li style="text-align: center;">
+            <div class="get-btn" onclick="get()" style="background: #0098DA;">
+                <span itemprop="salesforce id converter">Convert Saleforce ID</span>
+            </div>
+        </li>
+        <li>
+            <p itemprop="long id">Converted Id</p>
+            <input id="uid" type="text" placeholder="">
+        </li>
+    </ul>
+</div>
+<div itemscope="helper">
+    <p class="top-text" itemprop="description">
+        Convert SF(salesforce) ID from 15 digit to 18 or from 18 digit to 15.
+    </p>
+</div>
 </body>
+<script language="javascript">
+    function get(){
+        $('#inputs-wrapper').animate({ height: "150px" }, 400, "easeOutBounce");
+        if($('#url').val()==""){
+            alert("Please enter the Id");return;
+        }var y=$('#url').val().split("\r").join("").split("\n");var z=new Array();for(var x=0;x<y.length;x++){if(y[x].length==15){var s="";for(var i=0;i<3; i++){var f=0;for(var j=0;j<5;j++){var c=y[x].charAt(i*5+j);if(c>="A" && c<="Z")f+=1<<j;}s+="ABCDEFGHIJKLMNOPQRSTUVWXYZ012345".charAt(f);}z.push(y[x]+s);}else if(y[x].length==18){z.push(y[x].substring(0,15));} else {z.push('Oops!!! wrong Id');}}$('#uid').val(z.join("\r\n"));
+        $('#inputs-wrapper').animate({ height: "268px" }, 400, "easeOutBounce");
+    }
+</script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-78882141-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<!-- Hotjar Tracking Code for http://myfbtool.com/ -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:321850,hjsv:5};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
 </html>
