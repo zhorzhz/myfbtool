@@ -1,9 +1,16 @@
+const hskey   = fs.readFileSync('/etc/letsencrypt/live/myfbtool.com/privkey.pem');
+const hscert  = fs.readFileSync('/etc/letsencrypt/live/myfbtool.com/fullchain.pem');
+const options = {
+    key: hskey,
+    cert: hscert
+};
+
 const _         = require("lodash");
 const express   = require("express");
 const app       = express();
-const http      = require("http");
+const https     = require("https");
 const request   = require("request");
-const server    = http.Server(app);
+const server    = https.Server(options, app);
 const io        = require("socket.io")(server);
 
 server.listen(3000);
