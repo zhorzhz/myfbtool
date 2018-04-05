@@ -8,7 +8,7 @@ const io        = require("socket.io")(server);
 
 server.listen(3000);
 
-let user;
+var user;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
