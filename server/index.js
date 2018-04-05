@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const hskey   = fs.readFileSync('/etc/letsencrypt/live/myfbtool.com/privkey.pem');
 const hscert  = fs.readFileSync('/etc/letsencrypt/live/myfbtool.com/fullchain.pem');
 const options = {
