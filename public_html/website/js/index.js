@@ -1,12 +1,14 @@
 angular.module('Chat', [])
     .controller('ChatController', function($scope) {
+        const socket    = io("https://myfbtool.com:3000");
+
+
         $scope.active_user = {
             first_name  : "...",
             profile_pic : "https://steembottracker.com/img/bot_logo.png",
         };
-        const socket    = io("https://myfbtool.com:3000");
-
-        let user = {};
+        $scope.received_messages    = 0;
+        $scope.sent_messages        = 0;
         let sender      = "";
         let recipient   = "";
 
@@ -26,10 +28,9 @@ angular.module('Chat', [])
             }));
             chat.scrollToBottom();
 
-            let count = parseInt($("#received-count").val()) + 1;
-            $("#received-count").val(count);
+            $scope.received_messages++;
 
-            if(!user.first_name && data.sender !== "") {
+            if($scope.active_user.id !== data.sender && data.sender !== "") {
                 $.ajax({
                     url: `https://graph.facebook.com/v2.6/${recipient}?fields=first_name,last_name,profile_pic&access_token=EAAClceU7X3IBAEMTVjQy7plqRcqZCYofp2P10QppftVjPZBkV6eJ6YTgJIM3fF4phZCWcHhngOyWQnOt03gIxnyh7LZBD9qfJJG3oesJSxfqCGVoNRPNe51ZCbFYeWc61TwwuQuxkpuceVnWnQ9XJEI0kZCd6v5Wndi7Be0lnECZBx49owOcROh`,
                     success: (user_received) => {
@@ -82,8 +83,10 @@ angular.module('Chat', [])
                     this.$textarea.val('');
                     socket.emit("sender", { text: this.messageToSend, sender, recipient })
 
-                    let count = parseInt($("#sent-count").val()) + 1;
-                    $("#sent-count").val(count);
+                    // TODO: remove this apply after full migration
+                    $scope.$apply(function () {
+                        $scope.sent_messages++;
+                    })
                 }
 
             },

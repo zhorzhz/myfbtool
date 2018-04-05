@@ -19,9 +19,9 @@
             </div>
             <ul class="list">
                 <li class="clearfix">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_02.jpg" alt="avatar" />
                     <div class="about">
-                        <div class="name">Artoor Harutyunyan</div>
+                        <div class="name">test testikyan</div>
                         <div class="status">
                             <i class="fa fa-circle online"></i> online
                         </div>
@@ -48,8 +48,8 @@
 
                     <div class="chat-with">Chat with {{active_user.first_name}} {{active_user.last_name}}</div>
                     <div class="chat-num-messages">
-                        Total messages received: <input type="text" id="received-count" value="0" disabled><br>
-                        Total messages sent: <input type="text" id="sent-count" value="0" disabled><br>
+                        Total messages received: {{received_messages}} <br>
+                        Total messages sent: {{sent_messages}} <br>
                     </div>
                 </div>
                 <i class="fa fa-star"></i>
@@ -74,31 +74,31 @@
 
         </div> <!-- end chat -->
 
+
+        <script id="message-template" type="text/x-handlebars-template">
+            <li class="clearfix">
+                <div class="message-data align-right">
+                    <span class="message-data-time" >{{time}}, Today</span> &nbsp; &nbsp;
+                    <span class="message-data-name" >Me</span> <i class="fa fa-circle me"></i>
+                </div>
+                <div class="message other-message float-right">
+                  {{messageOutput}}
+                </div>
+            </li>
+        </script>
+
+        <script id="message-response-template" type="text/x-handlebars-template">
+            <li>
+                <div class="message-data">
+                    <span class="message-data-name"><i class="fa fa-circle online"></i>{{active_user.first_name}} {{ active_user.last_name}}</span>
+                    <span class="message-data-time">{{time}}, Today</span>
+                </div>
+                <div class="message my-message">
+                    {{response}}
+                </div>
+            </li>
+        </script>
     </div> <!-- end container -->
-
-    <script id="message-template" type="text/x-handlebars-template">
-        <li class="clearfix">
-            <div class="message-data align-right">
-                <span class="message-data-time" >{{time}}, Today</span> &nbsp; &nbsp;
-                <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
-            </div>
-            <div class="message other-message float-right">
-              {{messageOutput}}
-            </div>
-        </li>
-    </script>
-
-    <script id="message-response-template" type="text/x-handlebars-template">
-        <li>
-            <div class="message-data">
-                <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-                <span class="message-data-time">{{time}}, Today</span>
-            </div>
-            <div class="message my-message">
-                {{response}}
-            </div>
-        </li>
-    </script>
 
     <script src='lib/jquery.min.js'></script>
     <script src="lib/angular.min.js"></script>
