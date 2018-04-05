@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body ng-app="Chat">
 
-    <div class="container clearfix">
+    <div class="container clearfix" ng-controller="ChatController as chat">
         <div class="people-list" id="people-list">
             <div class="search">
                 <input type="text" placeholder="search" />
@@ -42,10 +42,11 @@
 
         <div class="chat">
             <div class="chat-header clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+                <img ng-src="{{active_user.profile_pic}}" alt="avatar" style="width: 64px;"/>
 
                 <div class="chat-about">
-                    <div class="chat-with">Chat with Artoor Harutyunyan</div>
+
+                    <div class="chat-with">Chat with {{active_user.first_name}} {{active_user.last_name}}</div>
                     <div class="chat-num-messages">
                         Total messages received: <input type="text" id="received-count" value="0" disabled><br>
                         Total messages sent: <input type="text" id="sent-count" value="0" disabled><br>
@@ -100,6 +101,7 @@
     </script>
 
     <script src='lib/jquery.min.js'></script>
+    <script src="lib/angular.min.js"></script>
     <script src='lib/handlebars.min.js'></script>
     <script src='lib/list.min.js'></script>
 
