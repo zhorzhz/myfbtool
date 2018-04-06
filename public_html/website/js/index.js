@@ -48,7 +48,6 @@ angular.module('Chat', [])
         });
     
         $scope.send_message = function (response) {
-            console.log("sernd", response);
             $scope.active_messages.push({
                 text: response,
                 time: chat.getCurrentTime(),
@@ -59,8 +58,7 @@ angular.module('Chat', [])
             $scope.response = "";
             
             //-- scroll to bottom
-            chat.scrollToBottom();
-            chat.scrollToBottom();
+            setTimeout(() => $(".chat-history").scrollTop(9999), 10);
         };
 
         var chat = {
