@@ -8,6 +8,7 @@ angular.module('Chat', [])
         profile_pic : "https://steembottracker.com/img/bot_logo.png",
     };
     $scope.active_messages = [];
+    $scope.users = {};
     $scope.response = "";
 
     $scope.received_messages    = 0;
@@ -15,21 +16,28 @@ angular.module('Chat', [])
 
     socket.on("receiver", (data) => {
 
-        if($scope.active_user.id !== data.sender && data.sender !== "") {
-            $.ajax({
+        if(_.isEmpty($scope.users[data.sender]) && data.sender !== "") {
+            return $.ajax({
                 url: `https://graph.facebook.com/v2.6/${data.sender}?fields=first_name,last_name,profile_pic&access_token=EAAClceU7X3IBAEMTVjQy7plqRcqZCYofp2P10QppftVjPZBkV6eJ6YTgJIM3fF4phZCWcHhngOyWQnOt03gIxnyh7LZBD9qfJJG3oesJSxfqCGVoNRPNe51ZCbFYeWc61TwwuQuxkpuceVnWnQ9XJEI0kZCd6v5Wndi7Be0lnECZBx49owOcROh`,
                 success: (user_received) => {
-                    console.log("user", user_received);
                     $scope.$apply(function () {
+                        $scope.users[data.sender] = _.merge({ messages: [] }, user_received);
                         $scope.active_user = user_received;
                     });
+                    add_message(data.text, data.sender);
                 }
             })
         }
 
+        if(!_.isEmpty($scope.users[data.sender]) && $scope.active_user.id !== data.sender && data.sender !== ""){
+            //-- Update active user and messages
+            $scope.active_user = _.find($scope.users, ["id", data.sender]);
+
+            return add_message(data.text, data.sender);
+        }
+
         add_message(data.text, data.sender);
 
-        $scope.received_messages++;
     });
 
     $scope.send_message = function (text) {
@@ -48,13 +56,16 @@ angular.module('Chat', [])
 
         //-- clear input
         $scope.response = "";
-        $scope.sent_messages++;
+    };
+
+    $scope.choose_user = (user) => {
+        $scope.active_user = user;
     };
 
     //-- Update chat history
     const add_message = (text, sender) => {
         $scope.$apply(() => {
-            $scope.active_messages.push({
+            $scope.users[$scope.active_user.id].messages.push({
                 text,
                 sender,
                 time: moment().format("LT"),
@@ -63,23 +74,11 @@ angular.module('Chat', [])
 
         //-- scroll to bottom
         setTimeout(() => $(".chat-history").scrollTop(9999), 10);
-    };
 
-    const searchFilter = {
-        options: { valueNames: ['name'] },
-        init: function() {
-            var userList = new List('people-list', this.options);
-            var noItems = $('<li id="no-items-found">No items found</li>');
-
-            userList.on('updated', function(list) {
-                if (list.matchingItems.length === 0) {
-                    $(list.list).append(noItems);
-                } else {
-                    noItems.detach();
-                }
-            });
+        if(sender !== 0) {
+            $scope.received_messages++;
+        } else {
+            $scope.sent_messages++;
         }
     };
-
-    searchFilter.init();
 });

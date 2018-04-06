@@ -18,22 +18,12 @@
                 <i class="fa fa-search"></i>
             </div>
             <ul class="list">
-                <li class="clearfix">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_02.jpg" alt="avatar" />
+                <li class="clearfix" ng-repeat="(key, user) in users" ng-click="choose_user(user)">
+                    <img ng-src="{{user.profile_pic}}" alt="avatar" />
                     <div class="about">
-                        <div class="name">test testikyan</div>
-                        <div class="status">
+                        <div class="name">{{user.first_name}} {{user.last_name}}</div>
+                        <div class="status" ng-if="active_user.id === user.id">
                             <i class="fa fa-circle online"></i> online
-                        </div>
-                    </div>
-                </li>
-
-                <li class="clearfix">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_02.jpg" alt="avatar" />
-                    <div class="about">
-                        <div class="name">Zhorzh Zakaryan</div>
-                        <div class="status">
-                        <i class="fa fa-circle offline"></i> left 7 mins ago
                         </div>
                     </div>
                 </li>
@@ -57,7 +47,7 @@
 
             <div class="chat-history">
                 <ul>
-                    <li class="clearfix" ng-repeat="message in active_messages">
+                    <li class="clearfix" ng-repeat="message in users[active_user.id].messages">
 
                         <div class="message-data align-right" ng-if="message.sender !== active_user.id">
                             <span class="message-data-time" >{{message.time}}, Today</span> &nbsp; &nbsp;
@@ -98,7 +88,8 @@
     <script src='lib/list.min.js'></script>
     <script src='lib/moment.min.js'></script>
     <script src="lib/socket.io.js"></script>
-    
+    <script src="lib/lodash.js"></script>
+
     <script  src="js/index.js"></script>
 
 </body>
