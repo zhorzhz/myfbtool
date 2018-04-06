@@ -47,9 +47,17 @@ angular.module('Chat', [])
             }
         });
     
-        $scope.send_message = function (response) {
+        $scope.send_message = function (text) {
+
+            if(text.length === 0){
+                return;
+            }
+            //-- Send message
+            socket.emit("sender", { text: text, sender, recipient });
+
+            //-- Update chat history
             $scope.active_messages.push({
-                text: response,
+                text: text,
                 time: chat.getCurrentTime(),
                 id: 0,
             });
@@ -91,7 +99,7 @@ angular.module('Chat', [])
                     this.$chatHistoryList.append(template(context));
                     this.scrollToBottom();
                     this.$textarea.val('');
-                    socket.emit("sender", { text: this.messageToSend, sender, recipient })
+
 
                     // TODO: remove this apply after full migration
                     $scope.$apply(function () {
