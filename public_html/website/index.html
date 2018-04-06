@@ -57,18 +57,36 @@
 
             <div class="chat-history">
                 <ul>
+                    <li class="clearfix" ng-repeat="message in active_messages">
 
+                        <div class="message-data align-right" ng-if="message.sender !== active_user.id">
+                            <span class="message-data-time" >{{message.time}}, Today</span> &nbsp; &nbsp;
+                            <span class="message-data-name" >Me</span> <i class="fa fa-circle me"></i>
+                        </div>
+                        <div class="message other-message float-right" ng-if="message.sender !== active_user.id">
+                            {{message.text}}
+                        </div>
+
+                        <div class="message-data" ng-if="message.sender === active_user.id">
+                            <span class="message-data-name"><i class="fa fa-circle online"></i>{{active_user.first_name}} {{ active_user.last_name}}</span>
+                            <span class="message-data-time">{{message.time}}, Today</span>
+                        </div>
+                        <div class="message my-message" ng-if="message.sender === active_user.id">
+                            {{message.text}}
+                        </div>
+
+                    </li>
                 </ul>
 
             </div> <!-- end chat-history -->
 
             <div class="chat-message clearfix">
-                <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3"></textarea>
+                <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3" ng-model="response" ng-keyup="$event.keyCode == 13 ? send_message(response) : false"></textarea>
 
                 <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
                 <i class="fa fa-file-image-o"></i>
 
-                <button>Send</button>
+                <button ng-click="send_message(response)">Send</button>
 
             </div> <!-- end chat-message -->
 
@@ -82,7 +100,7 @@
                     <span class="message-data-name" >Me</span> <i class="fa fa-circle me"></i>
                 </div>
                 <div class="message other-message float-right">
-                  {{messageOutput}}
+                  {{text}}
                 </div>
             </li>
         </script>

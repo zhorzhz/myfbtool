@@ -4,9 +4,13 @@ angular.module('Chat', [])
 
 
         $scope.active_user = {
+            id: 3301,
             first_name  : "...",
             profile_pic : "https://steembottracker.com/img/bot_logo.png",
         };
+        $scope.active_messages = [{ text: "1st message", time: "13:00", sender: 3301 }, { text: "2nd message", time: "13:00", sender: "Me", sender: 1 }];
+        $scope.response = "";
+        
         $scope.received_messages    = 0;
         $scope.sent_messages        = 0;
         let sender      = "";
@@ -42,6 +46,22 @@ angular.module('Chat', [])
                 })
             }
         });
+    
+        $scope.send_message = function (response) {
+            console.log("sernd", response);
+            $scope.active_messages.push({
+                text: response,
+                time: chat.getCurrentTime(),
+                id: 0,
+            });
+            
+            //-- clear input
+            $scope.response = "";
+            
+            //-- scroll to bottom
+            chat.scrollToBottom();
+            chat.scrollToBottom();
+        };
 
         var chat = {
             messageToSend: '',
@@ -85,7 +105,7 @@ angular.module('Chat', [])
 
             addMessage: function() {
                 this.messageToSend = this.$textarea.val();
-                this.render();
+                // this.render();
             },
             addMessageEnter: function(event) {
                 // enter was pressed
@@ -94,7 +114,8 @@ angular.module('Chat', [])
                 }
             },
             scrollToBottom: function() {
-                this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);
+                console.log("scrolll");
+                this.$chatHistory.scrollTop($('.chat-history').height());
             },
             getCurrentTime: function() {
                 return new Date().toLocaleTimeString().
