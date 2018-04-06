@@ -91,36 +91,10 @@
             </div> <!-- end chat-message -->
 
         </div> <!-- end chat -->
-
-
-        <script id="message-template" type="text/x-handlebars-template">
-            <li class="clearfix">
-                <div class="message-data align-right">
-                    <span class="message-data-time" >{{time}}, Today</span> &nbsp; &nbsp;
-                    <span class="message-data-name" >Me</span> <i class="fa fa-circle me"></i>
-                </div>
-                <div class="message other-message float-right">
-                  {{text}}
-                </div>
-            </li>
-        </script>
-
-        <script id="message-response-template" type="text/x-handlebars-template">
-            <li>
-                <div class="message-data">
-                    <span class="message-data-name"><i class="fa fa-circle online"></i>{{active_user.first_name}} {{ active_user.last_name}}</span>
-                    <span class="message-data-time">{{time}}, Today</span>
-                </div>
-                <div class="message my-message">
-                    {{response}}
-                </div>
-            </li>
-        </script>
     </div> <!-- end container -->
 
     <script src='lib/jquery.min.js'></script>
     <script src="lib/angular.min.js"></script>
-    <script src='lib/handlebars.min.js'></script>
     <script src='lib/list.min.js'></script>
     <script src='lib/moment.min.js'></script>
 
