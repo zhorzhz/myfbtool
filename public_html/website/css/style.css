@@ -52,7 +52,9 @@ body {
   padding-bottom: 20px;
 }
 .people-list img {
-  float: left;
+    float: left;
+    border-radius: 50%;
+    width: 55px;
 }
 .people-list .about {
   float: left;
@@ -80,7 +82,9 @@ body {
   border-bottom: 2px solid white;
 }
 .chat .chat-header img {
-  float: left;
+    float: left;
+    border-radius: 50%;
+    width: 64px;
 }
 .chat .chat-header .chat-about {
   float: left;
